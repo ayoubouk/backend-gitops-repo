@@ -1,19 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: backend-deployment
 spec:
-  replicas: 1
+  replicas: 1 # Vous pouvez ajuster le nombre de répliques selon vos besoins
   selector:
     matchLabels:
-      app: myapp
+      app: backend
   template:
     metadata:
       labels:
-        app: myapp
+        app: backend
     spec:
       containers:
-      - name: myapp
-        image: oukchiren/myapp:f95f4b40401706163cc3f38b7bbdd3343a5a70ff
+      - name: backend
+        image: rg.fr-par.scw.cloud/campus/sante-backend # Remplacez par votre image Docker
         ports:
-        - containerPort: 3000
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILE
+          value: rec
